@@ -1,0 +1,7 @@
+{
+  "name": "Dr. Pier Paolo Bonante - Longevity & Urology",
+  "description": "Sito professionale del Dr. Pier Paolo Bonante, specialista in Urologia, Andrologia e Medicina Estetica di lusso, ispirato al concept Longevity Suite.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
