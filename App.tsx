@@ -20,11 +20,11 @@ import {
   Droplets,
   Zap,
   Target,
-  FlaskConical,
   Microscope,
   LifeBuoy,
   MessageCircle,
-  Send
+  Send,
+  Check
 } from 'lucide-react';
 
 // --- Types ---
@@ -69,7 +69,7 @@ const WhatsAppChat: React.FC = () => {
           </div>
           <div className="p-4 bg-slate-50 min-h-[100px] flex flex-col justify-end">
             <div className="bg-white p-3 rounded-lg shadow-sm text-xs text-slate-700 max-w-[85%] self-start border border-slate-100">
-              Buongiorno, come posso aiutarla? Sarò lieta di inoltrare la sua richiesta direttamente al Dottore.
+              Buongiorno, sono la segretaria del Dr. Bonante. Come posso aiutarla? Inoltrerò il suo messaggio subito al Dottore.
             </div>
           </div>
           <form onSubmit={handleSendMessage} className="p-3 bg-white border-t border-slate-100 flex items-center space-x-2">
@@ -94,7 +94,7 @@ const WhatsAppChat: React.FC = () => {
         {isOpen ? <X size={28} /> : <MessageCircle size={28} fill="currentColor" className="text-white" />}
         {!isOpen && (
           <span className="absolute right-full mr-4 bg-white text-slate-900 px-4 py-2 rounded-lg text-xs font-bold shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            Chatta con noi
+            Contatta la Segreteria
           </span>
         )}
       </button>
@@ -183,7 +183,6 @@ const Navbar: React.FC<{ currentPage: Page; setPage: (p: Page) => void }> = ({ c
   );
 };
 
-// --- Row Helper ---
 const SectionRow: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = "py-24", id }) => (
   <section id={id} className={`w-full ${className}`}>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -196,565 +195,500 @@ const SectionRow: React.FC<{ children: React.ReactNode; className?: string; id?:
 
 const HomePage: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => (
   <>
-    {/* Row 1: Hero */}
+    {/* Hero Row */}
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img 
           src="https://www.centronaturamedica.com/wp-content/uploads/2019/08/Foto-Pierpaolo-Bonante-1200x992.jpg" 
           alt="Dr. Pier Paolo Bonante" 
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-top scale-105 animate-pulse-slow transition-transform duration-[10s]"
         />
-        <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-[1px]"></div>
+        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px]"></div>
       </div>
       <div className="relative text-center text-white px-4 max-w-4xl pt-20">
         <span className="text-xs uppercase tracking-[0.5em] mb-6 block font-light opacity-80">Eccellenza Medica • Innovazione Estetica</span>
         <h1 className="text-5xl md:text-8xl font-serif mb-8 leading-none">Longevity & <br/><span className="italic">Wellness</span></h1>
         <p className="text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto opacity-90 leading-relaxed">
-          Un approccio integrato alla longevità maschile e femminile, dove la clinica urologica incontra la medicina estetica d'avanguardia.
+          Il connubio esclusivo tra Chirurgia Urologica e Medicina Rigenerativa. Un approccio scientifico per ottimizzare la tua vitalità.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button onClick={() => setPage('longevity')} className="bg-white text-slate-900 px-10 py-5 font-bold text-[11px] uppercase tracking-widest hover:bg-slate-100 transition-all">
-            Concept Longevity
+            Scopri Longevity
           </button>
           <button onClick={() => setPage('medical')} className="border border-white/40 text-white px-10 py-5 font-bold text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all">
-            Area Medicale
+            Area Urologia
           </button>
         </div>
       </div>
     </section>
 
-    {/* Row 2: Vision */}
+    {/* Philosophy Row */}
     <SectionRow className="py-32 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         <div>
-          <span className="text-slate-400 uppercase tracking-widest text-xs font-bold mb-4 block">La Filosofia</span>
-          <h2 className="text-4xl md:text-6xl font-serif mb-8 leading-tight text-slate-900 italic">"Curare la salute per preservare la bellezza."</h2>
+          <span className="text-slate-400 uppercase tracking-widest text-xs font-bold mb-4 block">La Visione</span>
+          <h2 className="text-4xl md:text-6xl font-serif mb-8 leading-tight text-slate-900">Oltre la medicina, verso la longevità.</h2>
           <p className="text-slate-600 text-lg leading-relaxed mb-6">
-            Il Dr. Pier Paolo Bonante ridefinisce il benessere attraverso una visione "Longevity Suite". La medicina estetica non è più solo un ritocco, ma il culmine di un percorso di salute interna, equilibrio ormonale e prevenzione urologica.
+            Il Dr. Bonante unisce il rigore chirurgico acquisito in contesti internazionali alla sensibilità estetica più raffinata. Ogni trattamento è studiato per preservare l'armonia naturale e potenziare le funzioni biologiche.
           </p>
           <button onClick={() => setPage('profile')} className="flex items-center text-slate-900 font-bold uppercase tracking-widest text-[11px] group">
-            Scopri il Dr. Bonante <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={16} />
+            Leggi la Biografia <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={16} />
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-4">
-            <div className="h-64 bg-slate-100 rounded-lg overflow-hidden">
-               <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover grayscale" />
-            </div>
-            <div className="h-48 bg-slate-900 flex items-center justify-center p-8 rounded-lg">
-               <Target className="text-white w-12 h-12" />
-            </div>
-          </div>
-          <div className="space-y-4 pt-8">
-            <div className="h-48 bg-slate-50 border border-slate-100 flex items-center justify-center p-8 rounded-lg">
-               <Award className="text-slate-400 w-12 h-12" />
-            </div>
-            <div className="h-64 bg-slate-100 rounded-lg overflow-hidden">
-               <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover grayscale" />
-            </div>
-          </div>
+        <div className="relative group">
+           <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800" className="rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" />
+           <div className="absolute -bottom-8 -right-8 bg-slate-900 p-8 text-white hidden md:block">
+              <span className="text-4xl font-serif block mb-1 italic">30+</span>
+              <span className="text-[10px] uppercase tracking-widest opacity-60">Anni di Successi</span>
+           </div>
         </div>
       </div>
     </SectionRow>
 
-    {/* Row 3: Service Summary */}
+    {/* Services Overview Row */}
     <SectionRow className="py-24 bg-slate-50">
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-serif mb-4">Aree di Eccellenza</h2>
+        <h2 className="text-4xl font-serif mb-4">Aree d'Intervento</h2>
         <div className="w-20 h-0.5 bg-slate-900 mx-auto"></div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div className="text-center group">
-          <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:shadow-xl transition-all">
-            <Activity className="text-slate-900" />
-          </div>
-          <h3 className="text-xl font-serif mb-3">Urologia Specialistica</h3>
-          <p className="text-slate-500 text-sm">Diagnostica ecografica avanzata e prevenzione delle patologie maschili.</p>
+        <div className="bg-white p-10 shadow-sm hover:shadow-xl transition-all border border-slate-100">
+           <Activity className="mb-6 text-slate-400" />
+           <h3 className="text-xl font-serif mb-4">Andrologia</h3>
+           <p className="text-sm text-slate-500 leading-relaxed">Diagnostica avanzata per la salute maschile, fertilità e performance funzionale.</p>
         </div>
-        <div className="text-center group">
-          <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:shadow-xl transition-all">
-            <Sparkles className="text-slate-900" />
-          </div>
-          <h3 className="text-xl font-serif mb-3">Estetica Rigenerativa</h3>
-          <p className="text-slate-500 text-sm">Trattamenti mini-invasivi con precisione chirurgica per risultati naturali.</p>
+        <div className="bg-white p-10 shadow-sm hover:shadow-xl transition-all border border-slate-100">
+           <Sparkles className="mb-6 text-slate-400" />
+           <h3 className="text-xl font-serif mb-4">Medicina Estetica</h3>
+           <p className="text-sm text-slate-500 leading-relaxed">Trattamenti rigenerativi per il viso e il corpo con precisione millimetrica.</p>
         </div>
-        <div className="text-center group">
-          <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:shadow-xl transition-all">
-            <Zap className="text-slate-900" />
-          </div>
-          <h3 className="text-xl font-serif mb-3">Protocolli Longevity</h3>
-          <p className="text-slate-500 text-sm">Ottimizzazione metabolica e bio-hacking per il rallentamento dell'invecchiamento.</p>
+        <div className="bg-white p-10 shadow-sm hover:shadow-xl transition-all border border-slate-100">
+           <Zap className="mb-6 text-slate-400" />
+           <h3 className="text-xl font-serif mb-4">Longevity Suite</h3>
+           <p className="text-sm text-slate-500 leading-relaxed">Protocolli di bio-hacking per rallentare l'invecchiamento cellulare e sistemico.</p>
         </div>
       </div>
     </SectionRow>
 
-    {/* Row 4: Experience Counter */}
-    <SectionRow className="py-32 luxury-gradient text-white overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl"></div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center relative z-10">
-        <div>
-          <div className="text-5xl font-serif mb-2">30+</div>
-          <div className="text-[10px] uppercase tracking-[0.3em] opacity-50">Anni di Pratica</div>
-        </div>
-        <div>
-          <div className="text-5xl font-serif mb-2">5+</div>
-          <div className="text-[10px] uppercase tracking-[0.3em] opacity-50">Paesi Operativi</div>
-        </div>
-        <div>
-          <div className="text-5xl font-serif mb-2">10k+</div>
-          <div className="text-[10px] uppercase tracking-[0.3em] opacity-50">Pazienti Trattati</div>
-        </div>
-        <div>
-          <div className="text-5xl font-serif mb-2">100%</div>
-          <div className="text-[10px] uppercase tracking-[0.3em] opacity-50">Rigore Clinico</div>
-        </div>
-      </div>
-    </SectionRow>
-
-    {/* Row 5: Final CTA */}
-    <SectionRow className="py-24 bg-white text-center">
-      <div className="max-w-2xl mx-auto">
-        <h2 className="text-4xl font-serif mb-6">Inizia il tuo viaggio verso la longevità.</h2>
-        <p className="text-slate-500 mb-10">Prenota una consulenza presso lo studio di Foggia per un piano personalizzato di salute ed estetica.</p>
-        <button onClick={() => setPage('contact')} className="bg-slate-900 text-white px-12 py-5 font-bold text-[11px] uppercase tracking-widest hover:bg-slate-800 transition-all">
-          Richiedi Appuntamento
+    {/* Narrative Row */}
+    <SectionRow className="py-32 luxury-gradient text-white">
+      <div className="max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl md:text-5xl font-serif mb-8 italic">"L'eccellenza non è un atto, ma un'abitudine."</h2>
+        <p className="text-slate-400 text-lg leading-relaxed mb-12">
+          Dalle sale operatorie di Londra alle missioni in Africa, il Dr. Bonante ha operato dove la medicina è vita pura. Oggi porta questa dedizione nello studio di Foggia.
+        </p>
+        <button onClick={() => setPage('contact')} className="bg-white text-slate-900 px-10 py-4 font-bold text-[11px] uppercase tracking-widest hover:bg-slate-100 transition-all">
+          Prenota una consulenza
         </button>
+      </div>
+    </SectionRow>
+
+    {/* Location Row */}
+    <SectionRow className="py-24 bg-white">
+      <div className="flex flex-col md:flex-row gap-16 items-center">
+        <div className="md:w-1/2">
+          <h2 className="text-4xl font-serif mb-8">Dove trovarci.</h2>
+          <p className="text-slate-600 mb-8">Sede principale nel cuore di Foggia, un ambiente riservato ed elegante dove ogni paziente riceve un'attenzione personalizzata.</p>
+          <div className="space-y-4">
+            <div className="flex items-center space-x-4">
+               <MapPin className="text-slate-400" size={20} />
+               <span className="text-sm font-medium">Via G. Rosati 141, 71121 Foggia</span>
+            </div>
+            <div className="flex items-center space-x-4">
+               <Phone className="text-slate-400" size={20} />
+               <span className="text-sm font-medium">+39 0881 31 28 57</span>
+            </div>
+          </div>
+        </div>
+        <div className="md:w-1/2 w-full h-80 bg-slate-100 rounded-2xl overflow-hidden grayscale">
+           <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" />
+        </div>
       </div>
     </SectionRow>
   </>
 );
 
 const LongevityPage: React.FC = () => (
-  <div className="pt-24 bg-slate-50">
-    {/* Row 1: Hero */}
+  <div className="pt-24 bg-slate-50 min-h-screen">
     <SectionRow className="py-32">
       <div className="max-w-3xl">
-        <span className="text-xs uppercase tracking-[0.4em] font-bold text-slate-400 mb-4 block">The Bio-Suite</span>
-        <h1 className="text-6xl font-serif mb-8 leading-tight">L'arte di <br/><span className="italic text-slate-400">non invecchiare.</span></h1>
+        <span className="text-xs uppercase tracking-[0.4em] font-bold text-slate-400 mb-4 block">The Bio-Suite Concept</span>
+        <h1 className="text-6xl font-serif mb-8">Scienza della <span className="italic text-slate-400">Longevità.</span></h1>
         <p className="text-xl text-slate-600 font-light leading-relaxed">
-          Oltre la medicina curativa: la medicina preventiva ad alte prestazioni. Il Dr. Bonante unisce la precisione chirurgica alla mappatura dei marker biologici avanzati.
+          Prevenire l'invecchiamento prima che inizi. La nostra Longevity Suite è un percorso clinico integrato che agisce sulla qualità della vita a 360 gradi.
         </p>
       </div>
     </SectionRow>
 
-    {/* Row 2: Pillars */}
     <SectionRow className="py-24 bg-white">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {[
-          { icon: <Droplets />, title: "Skin Health", desc: "Rigenerazione cutanea profonda e bio-rivitalizzazione cellulare." },
-          { icon: <Activity />, title: "Metabolic Fix", desc: "Ottimizzazione del metabolismo e gestione dello stress ossidativo." },
-          { icon: <ShieldCheck />, title: "Immuno Boost", desc: "Protocolli per il rafforzamento delle difese naturali dell'organismo." },
-          { icon: <Zap />, title: "Vitality Index", desc: "Monitoraggio della forza fisica e delle performance cognitive." }
-        ].map((item, i) => (
-          <div key={i} className="p-10 border border-slate-50 bg-slate-50/50 rounded-2xl hover:bg-white hover:shadow-xl transition-all">
-            <div className="text-slate-900 mb-6">{item.icon}</div>
-            <h3 className="text-lg font-serif mb-3">{item.title}</h3>
-            <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+         <div className="space-y-12">
+            <div className="border-l-4 border-slate-900 pl-8">
+               <h3 className="text-2xl font-serif mb-3">Check-up Metabolico</h3>
+               <p className="text-slate-500 text-sm">Analisi dei marker infiammatori e dello stress ossidativo per mappare l'età biologica.</p>
+            </div>
+            <div className="border-l-4 border-slate-300 pl-8">
+               <h3 className="text-2xl font-serif mb-3">Skin Bio-hacking</h3>
+               <p className="text-slate-500 text-sm">Utilizziamo biostimolatori di ultima generazione per indurre la rigenerazione tissutale profonda.</p>
+            </div>
+         </div>
+         <div className="space-y-12">
+            <div className="border-l-4 border-slate-300 pl-8">
+               <h3 className="text-2xl font-serif mb-3">Andro-Longevity</h3>
+               <p className="text-slate-500 text-sm">Ottimizzazione della salute maschile per mantenere vitalità e performance nel tempo.</p>
+            </div>
+            <div className="border-l-4 border-slate-900 pl-8">
+               <h3 className="text-2xl font-serif mb-3">Nutraceutica Clinica</h3>
+               <p className="text-slate-500 text-sm">Integrazione mirata basata su analisi cliniche per colmare i deficit micronutrizionali.</p>
+            </div>
+         </div>
       </div>
     </SectionRow>
 
-    {/* Row 3: Diagnostics */}
     <SectionRow className="py-24 luxury-gradient text-white">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="text-4xl font-serif mb-8">Screening Longevità Maschile</h2>
-          <p className="text-slate-400 mb-8 leading-relaxed">
-            In quanto Urologo specializzato, il Dr. Bonante integra lo screening prostatico e andrologico nei protocolli di longevità, garantendo che la vitalità estetica sia supportata da una salute urogenitale perfetta.
-          </p>
-          <ul className="space-y-4">
-            <li className="flex items-center text-sm font-light"><Microscope className="mr-4 text-slate-600" /> Analisi marker PSA e profilo ormonale</li>
-            <li className="flex items-center text-sm font-light"><Microscope className="mr-4 text-slate-600" /> Ecografia uronefrologica con tecnologia 4K</li>
-            <li className="flex items-center text-sm font-light"><Microscope className="mr-4 text-slate-600" /> Valutazione stress ossidativo (d-ROMs test)</li>
-          </ul>
-        </div>
-        <div className="relative">
-          <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=80&w=800" className="rounded-lg shadow-2xl opacity-60" />
-        </div>
-      </div>
+       <div className="text-center max-w-2xl mx-auto">
+          <h2 className="text-4xl font-serif mb-8">Investi nel tuo futuro biologico.</h2>
+          <p className="text-slate-400 mb-10 leading-relaxed">I protocolli del Dr. Bonante sono personalizzati e basati sulle evidenze scientifiche più recenti nel campo della medicina anti-aging.</p>
+          <div className="flex justify-center space-x-12 opacity-60">
+             <div className="text-center"><Zap size={40} className="mx-auto mb-2" /><span className="text-[10px] uppercase tracking-widest">Energia</span></div>
+             <div className="text-center"><Droplets size={40} className="mx-auto mb-2" /><span className="text-[10px] uppercase tracking-widest">Pelle</span></div>
+             <div className="text-center"><Activity size={40} className="mx-auto mb-2" /><span className="text-[10px] uppercase tracking-widest">Vitalità</span></div>
+          </div>
+       </div>
     </SectionRow>
 
-    {/* Row 4: Treatment Focus */}
     <SectionRow className="py-24 bg-white">
-      <div className="flex flex-col md:flex-row gap-12">
-        <div className="md:w-1/3">
-          <div className="p-8 border-l-4 border-slate-900 bg-slate-50">
-            <h3 className="text-2xl font-serif mb-4">Bio-Stimolazione</h3>
-            <p className="text-sm text-slate-500">Iniezione di complessi vitaminici e precursori del collagene per "resettare" l'età cutanea.</p>
+       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+             <h2 className="text-3xl font-serif mb-6">Analisi della Vitalità</h2>
+             <p className="text-slate-600 mb-8">Utilizziamo tecnologie non invasive per monitorare i progressi del percorso Longevity.</p>
+             <ul className="space-y-4">
+                <li className="flex items-center space-x-3 text-sm"><Check className="text-slate-400" size={18} /> Valutazione della composizione corporea</li>
+                <li className="flex items-center space-x-3 text-sm"><Check className="text-slate-400" size={18} /> Monitoraggio dell'equilibrio ormonale</li>
+                <li className="flex items-center space-x-3 text-sm"><Check className="text-slate-400" size={18} /> Test del DNA per predisposizioni anti-aging</li>
+             </ul>
           </div>
-        </div>
-        <div className="md:w-1/3">
-          <div className="p-8 border-l-4 border-slate-300 bg-slate-50">
-            <h3 className="text-2xl font-serif mb-4">Detox Interno</h3>
-            <p className="text-sm text-slate-500">Piani nutrizionali clinici e integrazione mirata per ridurre l'infiammazione silente.</p>
+          <div className="rounded-2xl overflow-hidden shadow-2xl">
+             <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800" className="w-full h-auto" />
           </div>
-        </div>
-        <div className="md:w-1/3">
-          <div className="p-8 border-l-4 border-slate-200 bg-slate-50">
-            <h3 className="text-2xl font-serif mb-4">Balance Ormonale</h3>
-            <p className="text-sm text-slate-500">Supporto per l'equilibrio della salute maschile (Andropausa e gestione vitalità).</p>
-          </div>
-        </div>
-      </div>
+       </div>
     </SectionRow>
 
-    {/* Row 5: Why Longevity */}
-    <SectionRow className="py-24 bg-slate-50 text-center">
-      <h2 className="text-3xl font-serif mb-8">Perché scegliere la nostra Longevity Suite?</h2>
-      <div className="max-w-2xl mx-auto space-y-6 text-slate-600">
-        <p>A differenza dei centri estetici tradizionali, qui ogni trattamento è validato dal rigore clinico di un medico chirurgo specialista.</p>
-        <p className="italic text-slate-400">"Non promettiamo miracoli, ma applichiamo la scienza della vita."</p>
-      </div>
+    <SectionRow className="py-24 text-center">
+       <h2 className="text-2xl font-serif mb-6">Vuoi saperne di più sul bio-hacking?</h2>
+       <p className="text-slate-500 mb-8">Prenota un colloquio conoscitivo gratuito via WhatsApp.</p>
+       <button className="bg-slate-900 text-white px-8 py-4 font-bold uppercase tracking-widest text-[11px]">Scarica Brochure</button>
     </SectionRow>
   </div>
 );
 
 const MedicalPage: React.FC = () => (
-  <div className="pt-24 bg-white">
-    {/* Row 1: Hero */}
+  <div className="pt-24 bg-white min-h-screen">
     <SectionRow className="py-32 bg-slate-50">
       <div className="max-w-3xl">
-        <h1 className="text-6xl font-serif mb-8">Clinica <br/><span className="text-slate-400 italic">Urologica & Andrologica</span></h1>
-        <p className="text-lg text-slate-600 leading-relaxed">
-          Eccellenza diagnostica e chirurgica per la salute maschile. Il Dr. Bonante unisce competenza accademica e decenni di pratica internazionale.
+        <h1 className="text-6xl font-serif mb-8">Andrologia & <span className="italic text-slate-400">Urologia.</span></h1>
+        <p className="text-lg text-slate-600 leading-relaxed font-light">
+          La salute maschile richiede competenza specialistica e un approccio multidisciplinare. Diagnosi tempestiva e cura d'eccellenza.
         </p>
       </div>
     </SectionRow>
 
-    {/* Row 2: Diagnostics */}
     <SectionRow className="py-24">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="order-2 lg:order-1">
-          <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800" className="rounded-xl shadow-lg" />
-        </div>
-        <div className="order-1 lg:order-2">
-          <h2 className="text-3xl font-serif mb-6">Ecografia Uronefrologica</h2>
-          <p className="text-slate-600 mb-6">
-            Il Dr. Bonante è perfezionato in ecografia uronefrologica, permettendo una diagnosi immediata e non invasiva di patologie renali, vescicali e prostatiche direttamente in studio.
-          </p>
-          <ul className="space-y-4 text-sm font-medium text-slate-800">
-            <li className="flex items-center"><Activity className="mr-3 text-slate-400" size={18} /> Diagnosi Ipertrofia Prostatica</li>
-            <li className="flex items-center"><Activity className="mr-3 text-slate-400" size={18} /> Screening Neoplasie Vescicali</li>
-            <li className="flex items-center"><Activity className="mr-3 text-slate-400" size={18} /> Valutazione Calcolosi Renale</li>
-          </ul>
-        </div>
-      </div>
-    </SectionRow>
-
-    {/* Row 3: Andrology */}
-    <SectionRow className="py-24 bg-slate-900 text-white">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-serif italic">Andrologia & Salute Sessuale</h2>
-        <p className="text-slate-400 mt-4">Un approccio empatico e scientifico alle problematiche maschili.</p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="p-8 border border-white/10 rounded-lg">
-          <h4 className="text-xl font-serif mb-4">Disfunzione Erettile</h4>
-          <p className="text-sm text-slate-400">Trattamenti di ultima generazione per il ripristino della funzionalità e della fiducia.</p>
-        </div>
-        <div className="p-8 border border-white/10 rounded-lg">
-          <h4 className="text-xl font-serif mb-4">Infertilità Maschile</h4>
-          <p className="text-sm text-slate-400">Inquadramento clinico e diagnostico per il desiderio di genitorialità.</p>
-        </div>
-        <div className="p-8 border border-white/10 rounded-lg">
-          <h4 className="text-xl font-serif mb-4">Varicocele</h4>
-          <p className="text-sm text-slate-400">Gestione e indicazione chirurgica per una patologia comune ma impattante.</p>
-        </div>
-      </div>
-    </SectionRow>
-
-    {/* Row 4: List of Services */}
-    <SectionRow className="py-24">
-      <h3 className="text-2xl font-serif mb-12 text-center uppercase tracking-widest text-slate-300">Servizi Specialistici</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          "Uroflussimetria", "Cistoscopia", "Check-up Prostate", "Screening STD", 
-          "Ecocolordoppler", "Biopsia Prostatica", "Incontinenza", "Eiaculazione Precoce"
-        ].map(s => (
-          <div key={s} className="p-4 border border-slate-50 text-center text-xs font-bold text-slate-600 bg-slate-50/30 rounded uppercase tracking-wider">
-            {s}
-          </div>
-        ))}
-      </div>
-    </SectionRow>
-
-    {/* Row 5: Surgical Precision */}
-    <SectionRow className="py-24 bg-slate-50">
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl font-serif mb-6 italic">Precisione Chirurgica</h2>
-        <p className="text-slate-500 leading-relaxed">
-          Grazie alla solida formazione in Chirurgia Generale e d'Urgenza (La Sapienza Roma), ogni procedura viene eseguita con standard di sicurezza ospedalieri e minima invasività.
-        </p>
-      </div>
-    </SectionRow>
-  </div>
-);
-
-// Fix: AestheticPage needs setPage prop to handle internal navigation buttons
-const AestheticPage: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => (
-  <div className="pt-24 bg-slate-50">
-    {/* Row 1: Hero */}
-    <SectionRow className="py-32 bg-white">
-      <div className="max-w-3xl">
-        <span className="text-xs uppercase tracking-[0.4em] font-bold text-slate-400 mb-4 block">Medical Aesthetics</span>
-        <h1 className="text-6xl font-serif mb-8 italic">L'Estetica <br/><span className="text-slate-900 not-italic">secondo l'Urologo.</span></h1>
-        <p className="text-lg text-slate-600 font-light leading-relaxed">
-          Precisione millimetrica e conoscenza anatomica profonda. Dr. Bonante porta il rigore della sala operatoria nei trattamenti estetici di lusso.
-        </p>
-      </div>
-    </SectionRow>
-
-    {/* Row 2: Gallery Style Treatments */}
-    <SectionRow className="py-24">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="group relative h-[500px] overflow-hidden rounded-2xl shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110" />
-          <div className="absolute inset-0 bg-slate-900/40 p-12 flex flex-col justify-end text-white">
-            <h3 className="text-3xl font-serif mb-4">Facial Bio-Modulation</h3>
-            <p className="text-sm opacity-80 max-w-xs">Filler e botulino applicati per esaltare i lineamenti naturali senza stravolgere l'identità.</p>
-          </div>
-        </div>
-        <div className="group relative h-[500px] overflow-hidden rounded-2xl shadow-2xl translate-y-12">
-          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110" />
-          <div className="absolute inset-0 bg-slate-900/40 p-12 flex flex-col justify-end text-white">
-            <h3 className="text-3xl font-serif mb-4">Male Contouring</h3>
-            <p className="text-sm opacity-80 max-w-xs">Specifico per l'uomo: ridefinizione mandibolare e trattamento del contorno occhi.</p>
-          </div>
-        </div>
-      </div>
-    </SectionRow>
-
-    {/* Row 3: Methodology */}
-    <SectionRow className="py-32 bg-slate-900 text-white mt-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
-          <h2 className="text-4xl font-serif mb-8 italic">Metodo Rigenerativo</h2>
-          <p className="text-slate-400 mb-8">
-            Non usiamo solo riempitivi. Utilizziamo biostimolatori che "istruiscono" la tua pelle a produrre nuovo collagene. È estetica curativa, non solo correttiva.
-          </p>
-          <div className="space-y-6">
-            <div className="flex items-start">
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0"><CheckIcon /></div>
-              <p className="text-sm">Risultati armoniosi e "invisible touch".</p>
-            </div>
-            <div className="flex items-start">
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mr-4 shrink-0"><CheckIcon /></div>
-              <p className="text-sm">Materiali certificati di altissima gamma.</p>
-            </div>
-          </div>
+           <img src="https://images.unsplash.com/photo-1576091160550-2173dad99a01?auto=format&fit=crop&q=80&w=800" className="rounded-xl shadow-lg grayscale" />
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="h-48 bg-white/5 rounded-lg border border-white/10"></div>
-          <div className="h-48 bg-white/5 rounded-lg border border-white/10"></div>
-          <div className="h-48 bg-white/5 rounded-lg border border-white/10"></div>
-          <div className="h-48 bg-white/5 rounded-lg border border-white/10"></div>
+        <div>
+           <h2 className="text-3xl font-serif mb-6">Diagnostica per Immagini</h2>
+           <p className="text-slate-600 mb-8 leading-relaxed">
+              Il Dr. Bonante è perfezionato in ecografia uronefrologica. Questo ci permette di eseguire esami approfonditi in tempo reale durante la visita specialistica.
+           </p>
+           <div className="grid grid-cols-2 gap-6">
+              <div className="p-4 border border-slate-100 bg-slate-50">
+                 <h4 className="font-bold text-xs uppercase mb-2">Ecografia Prostatica</h4>
+                 <p className="text-[10px] text-slate-500">Analisi transrettale high-res per screening preventivo.</p>
+              </div>
+              <div className="p-4 border border-slate-100 bg-slate-50">
+                 <h4 className="font-bold text-xs uppercase mb-2">Uroflussimetria</h4>
+                 <p className="text-[10px] text-slate-500">Valutazione funzionale immediata delle basse vie urinarie.</p>
+              </div>
+           </div>
         </div>
       </div>
     </SectionRow>
 
-    {/* Row 4: Clinical Safety */}
-    <SectionRow className="py-24 bg-white">
-      <div className="text-center max-w-3xl mx-auto">
-        <Stethoscope className="w-12 h-12 text-slate-300 mx-auto mb-6" />
-        <h2 className="text-3xl font-serif mb-6">Sicurezza Oltre lo Standard</h2>
-        <p className="text-slate-500 text-sm leading-relaxed">
-          Essendo un medico chirurgo urologo, il Dr. Bonante opera in un ambiente protetto, garantendo la massima igiene e la gestione professionale di qualsiasi evenienza clinica. L'estetica medicale richiede responsabilità.
+    <SectionRow className="py-24 bg-slate-900 text-white">
+       <div className="text-center mb-16">
+          <h2 className="text-4xl font-serif italic">Patologie Trattate</h2>
+          <p className="text-slate-400 mt-4">Gestione clinica e chirurgica delle principali problematiche urologiche.</p>
+       </div>
+       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {["Prostatite", "Disfunzione Erettile", "Calcolosi", "Infertilità", "Incontinenza", "Varicocele", "Cistite", "Neoplasie"].map(item => (
+            <div key={item} className="text-center p-6 border border-white/10 rounded-lg hover:bg-white/5 transition-all">
+               <span className="text-sm font-medium tracking-widest uppercase">{item}</span>
+            </div>
+          ))}
+       </div>
+    </SectionRow>
+
+    <SectionRow className="py-24">
+       <div className="max-w-4xl mx-auto text-center">
+          <Microscope size={48} className="mx-auto mb-8 text-slate-300" />
+          <h2 className="text-3xl font-serif mb-6">L'importanza della prevenzione.</h2>
+          <p className="text-slate-600 leading-relaxed mb-10">Lo screening urologico dopo i 45 anni è fondamentale per la salute maschile. Il Dr. Bonante offre protocolli di monitoraggio annuale dedicati.</p>
+          <button className="border border-slate-900 text-slate-900 px-10 py-4 font-bold text-[10px] uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all">Controlla i tuoi Marker</button>
+       </div>
+    </SectionRow>
+
+    <SectionRow className="py-24 bg-slate-50 text-center">
+       <p className="text-slate-400 italic text-sm">"In urologia, il tempo è il fattore più critico per una guarigione completa."</p>
+    </SectionRow>
+  </div>
+);
+
+const AestheticPage: React.FC<{ setPage: (p: Page) => void }> = ({ setPage }) => (
+  <div className="pt-24 bg-slate-50 min-h-screen">
+    <SectionRow className="py-32 bg-white">
+      <div className="max-w-3xl">
+        <span className="text-xs uppercase tracking-[0.4em] font-bold text-slate-400 mb-4 block">Aesthetic Medicine</span>
+        <h1 className="text-6xl font-serif mb-8">Rigenerazione <span className="italic text-slate-400">Naturale.</span></h1>
+        <p className="text-lg text-slate-600 font-light leading-relaxed">
+          Un'estetica guidata dalla medicina. Non alteriamo la tua fisionomia, ne ottimizziamo la luce e la struttura cellulare.
         </p>
       </div>
     </SectionRow>
 
-    {/* Row 5: CTA */}
-    <SectionRow className="py-24 bg-slate-50">
-      <div className="flex flex-col items-center">
-        <h3 className="text-2xl font-serif mb-8">Vuoi ridefinire la tua immagine?</h3>
-        <button onClick={() => setPage('contact')} className="border border-slate-900 text-slate-900 px-10 py-4 font-bold text-[10px] uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all">
-          Parla con il Dr. Bonante
-        </button>
-      </div>
+    <SectionRow className="py-24">
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="relative group overflow-hidden rounded-3xl h-[600px]">
+             <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0" />
+             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent p-12 flex flex-col justify-end">
+                <h3 className="text-white text-3xl font-serif mb-4">Viso & Collo</h3>
+                <p className="text-slate-300 text-sm">Filler, Botox e Biostimolazione per un effetto lifting naturale senza bisturi.</p>
+             </div>
+          </div>
+          <div className="relative group overflow-hidden rounded-3xl h-[600px] mt-12 md:mt-24">
+             <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0" />
+             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent p-12 flex flex-col justify-end">
+                <h3 className="text-white text-3xl font-serif mb-4">Body Contouring</h3>
+                <p className="text-slate-300 text-sm">Trattamenti lipolitici e tonificanti per ridefinire la silhouette maschile e femminile.</p>
+             </div>
+          </div>
+       </div>
+    </SectionRow>
+
+    <SectionRow className="py-32 bg-slate-900 text-white">
+       <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-serif mb-12 text-center italic">Il Metodo Bonante</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+             <div className="text-center">
+                <div className="text-slate-400 font-bold mb-4">01.</div>
+                <h4 className="text-xl font-serif mb-4">Precisione</h4>
+                <p className="text-xs text-slate-500">Utilizzo di tecniche chirurgiche per minimizzare traumi e lividi.</p>
+             </div>
+             <div className="text-center">
+                <div className="text-slate-400 font-bold mb-4">02.</div>
+                <h4 className="text-xl font-serif mb-4">Sicurezza</h4>
+                <p className="text-xs text-slate-500">Solo materiali certificati e biocompatibili di altissima gamma.</p>
+             </div>
+             <div className="text-center">
+                <div className="text-slate-400 font-bold mb-4">03.</div>
+                <h4 className="text-xl font-serif mb-4">Naturalezza</h4>
+                <p className="text-xs text-slate-500">Risultati armonici che rispettano l'espressività individuale.</p>
+             </div>
+          </div>
+       </div>
+    </SectionRow>
+
+    <SectionRow className="py-24 bg-white">
+       <div className="flex flex-col lg:flex-row gap-16 items-center">
+          <div className="lg:w-1/2">
+             <h2 className="text-3xl font-serif mb-6">Trattamenti di Punta</h2>
+             <div className="space-y-4">
+                {["Lifting Non Chirurgico", "Peeling Chimici Medicali", "Radiofrequenza Frazionata", "Carbossiterapia", "Fili di trazione"].map(t => (
+                  <div key={t} className="flex items-center justify-between py-4 border-b border-slate-100">
+                     <span className="text-sm font-medium">{t}</span>
+                     <ArrowRight size={14} className="text-slate-300" />
+                  </div>
+                ))}
+             </div>
+          </div>
+          <div className="lg:w-1/2">
+             <div className="bg-slate-50 p-12 rounded-2xl">
+                <h3 className="text-2xl font-serif mb-4">Domande Frequenti</h3>
+                <p className="text-sm text-slate-500 leading-relaxed mb-6">Scopri i tempi di recupero e le modalità di intervento per ogni tipologia di trattamento estetico medicale.</p>
+                <button onClick={() => setPage('contact')} className="text-slate-900 font-bold uppercase tracking-widest text-[10px] border-b border-slate-900">Consulta il Dottore</button>
+             </div>
+          </div>
+       </div>
+    </SectionRow>
+
+    <SectionRow className="py-24 text-center">
+       <p className="text-slate-400 text-xs uppercase tracking-widest">Bellezza è Salute. Salute è Longevità.</p>
     </SectionRow>
   </div>
 );
 
-const ProfilePage: React.FC = () => {
-  return (
-    <div className="pt-24 min-h-screen bg-white">
-      {/* Row 1: Profile Header */}
-      <SectionRow className="py-32 bg-slate-50">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
+const ProfilePage: React.FC = () => (
+  <div className="pt-24 bg-white min-h-screen">
+    <SectionRow className="py-32 bg-slate-50">
+       <div className="flex flex-col lg:flex-row gap-20 items-center">
           <div className="lg:w-1/3">
-             <img src="https://www.centronaturamedica.com/wp-content/uploads/2019/08/Foto-Pierpaolo-Bonante-1200x992.jpg" alt="CV Photo" className="w-full h-auto rounded shadow-2xl grayscale" />
+             <img src="https://www.centronaturamedica.com/wp-content/uploads/2019/08/Foto-Pierpaolo-Bonante-1200x992.jpg" alt="Dr Bonante" className="rounded-lg shadow-2xl grayscale" />
           </div>
           <div className="lg:w-2/3">
-            <h1 className="text-5xl font-serif mb-6 text-slate-900">Dr. Pier Paolo <br/><span className="italic">Bonante</span></h1>
-            <p className="text-slate-500 uppercase tracking-widest text-sm font-bold mb-8">Medico Chirurgo • Specialista in Urologia • Andrologo</p>
-            <p className="text-slate-600 leading-relaxed max-w-2xl">
-              Nato a Foggia nel 1963, il Dr. Bonante incarna la figura del medico cosmopolita. Con una formazione d'eccellenza a Roma e una carriera che ha toccato il Regno Unito, l'Africa e le rotte internazionali come medico di bordo, porta un'esperienza umana e clinica ineguagliabile nel cuore di Foggia.
-            </p>
+             <h1 className="text-5xl font-serif mb-6">Dr. Pier Paolo Bonante</h1>
+             <p className="text-slate-500 uppercase tracking-widest text-sm font-bold mb-8 italic text-slate-400">Urologo • Andrologo • Chirurgo • Medico Estetico</p>
+             <p className="text-slate-600 leading-relaxed text-lg mb-8">
+                Oltre tre decenni di esperienza clinica tra Italia, Galles, Inghilterra e Africa. Un medico che ha dedicato la vita alla cura dell'essere umano in ogni sua sfaccettatura, dall'emergenza in contesti critici alla medicina d'eccellenza privata.
+             </p>
+             <div className="flex space-x-6">
+                <Globe className="text-slate-300" />
+                <Anchor className="text-slate-300" />
+                <Award className="text-slate-300" />
+             </div>
           </div>
-        </div>
-      </SectionRow>
+       </div>
+    </SectionRow>
 
-      {/* Row 2: Education & Specialization */}
-      <SectionRow className="py-24 border-b border-slate-100">
-        <h2 className="text-3xl font-serif mb-12 flex items-center"><Award className="mr-6 text-slate-400" /> Formazione Accademica</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="p-8 bg-slate-50 rounded-lg">
-            <h4 className="font-bold text-slate-900 mb-2">Laurea in Medicina e Chirurgia</h4>
-            <p className="text-slate-500 text-sm italic mb-4">La Sapienza, Roma - 1991 (108/110)</p>
-            <p className="text-slate-600 text-sm">Tesi sperimentale sulle neoplasie gastriche e tecniche di ricostruzione. Internato in Chirurgia d'Urgenza.</p>
+    <SectionRow className="py-24">
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="space-y-12">
+             <h3 className="text-2xl font-serif mb-8 border-b border-slate-100 pb-4">Istruzione e Specializzazione</h3>
+             <div className="space-y-8">
+                <div>
+                   <span className="text-xs font-bold text-slate-400">1991</span>
+                   <h4 className="font-bold">Laurea in Medicina e Chirurgia</h4>
+                   <p className="text-sm text-slate-500">Università "La Sapienza" di Roma (108/110)</p>
+                </div>
+                <div>
+                   <span className="text-xs font-bold text-slate-400">1997</span>
+                   <h4 className="font-bold">Specializzazione in Urologia</h4>
+                   <p className="text-sm text-slate-500">Università Cattolica "Sacro Cuore" di Roma (50/50 Lode)</p>
+                </div>
+                <div>
+                   <span className="text-xs font-bold text-slate-400">Post-Grad</span>
+                   <h4 className="font-bold">Perfezionamenti Diversificati</h4>
+                   <p className="text-sm text-slate-500">Ecografia Uronefrologica, Fitomedicina, Diving Medicine, Chirurgia d'Urgenza.</p>
+                </div>
+             </div>
           </div>
-          <div className="p-8 bg-slate-900 text-white rounded-lg">
-            <h4 className="font-bold mb-2">Specializzazione in Urologia</h4>
-            <p className="text-slate-400 text-sm italic mb-4">Univ. Cattolica Sacro Cuore, Roma - 1997 (50/50 Lode)</p>
-            <p className="text-slate-300 text-sm">Tesi sperimentale sulle neoplasie maligne su rene a ferro di cavallo.</p>
+          <div className="space-y-12">
+             <h3 className="text-2xl font-serif mb-8 border-b border-slate-100 pb-4">Esperienze Internazionali</h3>
+             <div className="space-y-8">
+                <div>
+                   <h4 className="font-bold">United Kingdom (NHS)</h4>
+                   <p className="text-sm text-slate-500">Trust Grade in Galles e Specialist Registrar a Londra presso Chelsea and Westminster Hospital.</p>
+                </div>
+                <div>
+                   <h4 className="font-bold">Missioni Umanitarie (Africa)</h4>
+                   <p className="text-sm text-slate-500">Chirurgo Cooperante in Angola e Burundi con ONG internazionali. Responsabile formazione chirurgia d'urgenza.</p>
+                </div>
+                <div>
+                   <h4 className="font-bold">Navi da Crociera</h4>
+                   <p className="text-sm text-slate-500">Chief Ship's Doctor per Royal Caribbean e Costa Crociere su rotte globali.</p>
+                </div>
+             </div>
           </div>
-        </div>
-      </SectionRow>
+       </div>
+    </SectionRow>
 
-      {/* Row 3: International Journey */}
-      <SectionRow className="py-24 bg-white">
-        <h2 className="text-3xl font-serif mb-12 flex items-center"><Globe className="mr-6 text-slate-400" /> Il Percorso Globale</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="group">
-            <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">United Kingdom</div>
-            <h4 className="font-serif text-xl mb-4 group-hover:text-slate-400 transition-colors">NHS Experience</h4>
-            <p className="text-slate-500 text-sm">Specialist Registrar presso i più prestigiosi ospedali di Londra: Chelsea and Westminster, Saint Mary e Whipps Cross.</p>
-          </div>
-          <div className="group">
-            <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">Africa & Missions</div>
-            <h4 className="font-serif text-xl mb-4 group-hover:text-slate-400 transition-colors">Humanitarian Surgeon</h4>
-            <p className="text-slate-500 text-sm">Chirurgo in Angola e Burundi con ONG internazionali (INTERSOS, Alisei). Responsabile di progetti di formazione in chirurgia d'urgenza.</p>
-          </div>
-          <div className="group">
-            <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">High Seas</div>
-            <h4 className="font-serif text-xl mb-4 group-hover:text-slate-400 transition-colors">Chief Ship's Doctor</h4>
-            <p className="text-slate-500 text-sm">Direttore Sanitario per Royal Caribbean e Costa Crociere. Gestione di emergenze e medicina preventiva su navi da crociera internazionali.</p>
-          </div>
-        </div>
-      </SectionRow>
-
-      {/* Row 4: Professional Timeline */}
-      <SectionRow className="py-24 bg-slate-50">
-        <h2 className="text-3xl font-serif mb-12 text-center">Tappe Fondamentali</h2>
-        <div className="max-w-4xl mx-auto space-y-12">
+    <SectionRow className="py-24 bg-slate-900 text-white">
+       <h2 className="text-3xl font-serif mb-12 text-center">Timeline Professionale</h2>
+       <div className="max-w-4xl mx-auto space-y-8">
           {[
-            { year: "1992-1997", event: "Borsista presso Casa Sollievo della Sofferenza (S. Giovanni Rotondo)." },
-            { year: "2002", event: "Iscrizione al General Medical Council (GMC) del Regno Unito." },
-            { year: "2006", event: "Conseguimento Idoneità a Medico di Bordo dal Ministero della Salute." },
-            { year: "2007-2008", event: "Country Chief Medical Officer in Yemen (International SOS)." },
-            { year: "2013-Oggi", event: "Specialista Ambulatoriale Urologia presso ASL Foggia e ASUGI Trieste." }
+            { year: "1992-1997", event: "Specialista in formazione presso Casa Sollievo della Sofferenza." },
+            { year: "2002", event: "Iscrizione al General Medical Council (UK)." },
+            { year: "2006", event: "Conseguimento Idoneità a Medico di Bordo." },
+            { year: "2007-2008", event: "Chief Medical Officer in Yemen (International SOS)." },
+            { year: "Oggi", event: "Specialista Ambulatoriale Urologia presso ASL Foggia." }
           ].map((item, idx) => (
-            <div key={idx} className="flex gap-12 group">
-              <div className="w-24 text-right shrink-0">
-                <span className="text-xs font-bold text-slate-900 uppercase tracking-widest">{item.year}</span>
-              </div>
-              <div className="pb-12 border-l border-slate-200 pl-12 relative">
-                <div className="absolute left-[-4.5px] top-1.5 w-2 h-2 rounded-full bg-slate-900 group-hover:scale-150 transition-transform"></div>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.event}</p>
-              </div>
+            <div key={idx} className="flex items-center space-x-8">
+               <span className="w-24 text-right text-xs font-bold text-slate-500">{item.year}</span>
+               <div className="w-3 h-3 rounded-full bg-white"></div>
+               <p className="text-sm text-slate-300">{item.event}</p>
             </div>
           ))}
-        </div>
-      </SectionRow>
+       </div>
+    </SectionRow>
 
-      {/* Row 5: Certificates & Skills */}
-      <SectionRow className="py-24 bg-white">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <SectionRow className="py-24 bg-slate-50">
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div>
-            <h3 className="text-2xl font-serif mb-8">Certificazioni Critiche</h3>
-            <div className="space-y-4">
-              {["ATLS (American College of Surgeons)", "Advanced Life Support (ERC)", "Pediatric ALS", "Diving Medicine (Rijeka)", "Fitomedicina"].map(c => (
-                <div key={c} className="flex items-center text-sm text-slate-600">
-                  <ShieldCheck className="mr-3 text-slate-400" size={16} /> {c}
-                </div>
-              ))}
-            </div>
+             <h3 className="text-2xl font-serif mb-6">Certificazioni Critiche</h3>
+             <ul className="space-y-3 text-sm text-slate-500">
+                <li>• ATLS (American College of Surgeons)</li>
+                <li>• Advanced Life Support (European Resuscitation Council)</li>
+                <li>• Paediatric Basic Life Support</li>
+                <li>• Training Center di Ecogia (Ginevra) - Chirurgia Ferite di Guerra</li>
+             </ul>
           </div>
-          <div className="bg-slate-900 p-12 text-white rounded-2xl">
-            <h3 className="text-2xl font-serif mb-6 italic">Passioni Oltre la Medicina</h3>
-            <p className="text-slate-400 text-sm leading-relaxed mb-8">
-              Il Dr. Bonante coltiva interessi che riflettono la sua anima cosmopolita: vela e sport acquatici, lettura, viaggi e il collezionismo di soldatini e arte africana.
-            </p>
-            <div className="flex gap-4">
-               <Anchor className="text-slate-600" />
-               <Compass className="text-slate-600" />
-               <LifeBuoy className="text-slate-600" />
-            </div>
+          <div>
+             <h3 className="text-2xl font-serif mb-6">Passioni Personali</h3>
+             <p className="text-sm text-slate-500 leading-relaxed italic">
+                Oltre la medicina, il Dr. Bonante coltiva l'amore per il mare (vela), il viaggio, il collezionismo di soldatini e l'arte africana, riflesso della sua anima cosmopolita.
+             </p>
           </div>
-        </div>
-      </SectionRow>
-    </div>
-  );
-};
+       </div>
+    </SectionRow>
 
-const ContactPage: React.FC = () => (
-  <div className="pt-24 min-h-screen bg-slate-50 flex items-center py-20">
-    <div className="max-w-7xl mx-auto px-4 w-full">
-      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
-        {/* Row 1/Col 1: Details */}
-        <div className="p-16 bg-slate-900 text-white flex flex-col justify-center">
-          <h2 className="text-5xl font-serif mb-8">Prenota una <br/><span className="italic">Consulenza.</span></h2>
-          <div className="space-y-12">
-            <div className="flex items-start space-x-6">
-              <MapPin className="text-slate-500 shrink-0" />
-              <div>
-                <p className="font-bold mb-1 uppercase text-xs tracking-widest">Sede Principale</p>
-                <p className="text-slate-400 text-sm">Via G. Rosati 141, 71121 Foggia (FG)</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-6">
-              <Phone className="text-slate-500 shrink-0" />
-              <div>
-                <p className="font-bold mb-1 uppercase text-xs tracking-widest">Recapiti</p>
-                <p className="text-slate-400 text-sm">Fisso: +39 0881 31 28 57</p>
-                <p className="text-slate-400 text-sm">Mobile: +39 348 49 87 591</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-6">
-              <Mail className="text-slate-500 shrink-0" />
-              <div>
-                <p className="font-bold mb-1 uppercase text-xs tracking-widest">Email & PEC</p>
-                <p className="text-slate-400 text-sm">ppbon@hotmail.com</p>
-                <p className="text-slate-500 text-[10px] mt-1">drpierpaolobonante@pec.it</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Row 1/Col 2: Form */}
-        <div className="p-16 flex flex-col justify-center">
-          <h3 className="text-2xl font-serif mb-12 text-slate-900">Inviaci un Messaggio</h3>
-          <form className="space-y-8">
-            <div className="grid grid-cols-2 gap-6">
-              <input placeholder="Nome" className="w-full border-b border-slate-200 py-4 outline-none focus:border-slate-900 bg-transparent text-sm" />
-              <input placeholder="Cognome" className="w-full border-b border-slate-200 py-4 outline-none focus:border-slate-900 bg-transparent text-sm" />
-            </div>
-            <input placeholder="Indirizzo Email" className="w-full border-b border-slate-200 py-4 outline-none focus:border-slate-900 bg-transparent text-sm" />
-            <select className="w-full border-b border-slate-200 py-4 outline-none bg-transparent text-sm text-slate-500">
-              <option>Visita Urologica / Andrologica</option>
-              <option>Check-up Prostata</option>
-              <option>Medicina Estetica / Filler</option>
-              <option>Protocollo Longevity</option>
-            </select>
-            <textarea placeholder="Inserisci la tua richiesta..." rows={4} className="w-full border-b border-slate-200 py-4 outline-none focus:border-slate-900 bg-transparent text-sm" />
-            <button className="w-full bg-slate-900 text-white py-6 font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-slate-800 transition-colors shadow-xl">
-              Richiedi Appuntamento
-            </button>
-          </form>
-          <p className="text-[10px] text-slate-400 mt-8 text-center italic">
-            I dati saranno trattati nel rispetto della normativa sulla privacy.
-          </p>
-        </div>
-      </div>
-    </div>
+    <SectionRow className="py-24 text-center">
+       <button className="bg-slate-900 text-white px-10 py-4 font-bold uppercase tracking-widest text-[11px]">Visualizza CV Completo (PDF)</button>
+    </SectionRow>
   </div>
 );
 
-// --- Helpers ---
-const CheckIcon = () => (
-  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-  </svg>
+const ContactPage: React.FC = () => (
+  <div className="pt-24 bg-slate-50 min-h-screen flex items-center">
+    <SectionRow className="py-20 w-full">
+       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+          <div className="p-16 bg-slate-900 text-white flex flex-col justify-center">
+             <h2 className="text-5xl font-serif mb-12 leading-tight">Inizia il tuo <br/><span className="italic">percorso.</span></h2>
+             <div className="space-y-10">
+                <div className="flex items-start space-x-6">
+                   <MapPin className="text-slate-500 mt-1" />
+                   <div>
+                      <p className="text-xs uppercase tracking-widest font-bold mb-1">Indirizzo</p>
+                      <p className="text-slate-400 text-sm">Via G. Rosati 141, 71121 Foggia (FG)</p>
+                   </div>
+                </div>
+                <div className="flex items-start space-x-6">
+                   <Phone className="text-slate-500 mt-1" />
+                   <div>
+                      <p className="text-xs uppercase tracking-widest font-bold mb-1">Recapito Telefonico</p>
+                      <p className="text-slate-400 text-sm">+39 348 49 87 591</p>
+                      <p className="text-slate-400 text-sm">+39 0881 31 28 57</p>
+                   </div>
+                </div>
+                <div className="flex items-start space-x-6">
+                   <Mail className="text-slate-500 mt-1" />
+                   <div>
+                      <p className="text-xs uppercase tracking-widest font-bold mb-1">E-mail Principale</p>
+                      <p className="text-slate-400 text-sm">ppbon@hotmail.com</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div className="p-16 flex flex-col justify-center">
+             <form className="space-y-8">
+                <div className="grid grid-cols-2 gap-8">
+                   <input placeholder="Nome" className="w-full border-b border-slate-200 py-3 text-sm outline-none focus:border-slate-900 bg-transparent" />
+                   <input placeholder="Cognome" className="w-full border-b border-slate-200 py-3 text-sm outline-none focus:border-slate-900 bg-transparent" />
+                </div>
+                <input placeholder="E-mail" className="w-full border-b border-slate-200 py-3 text-sm outline-none focus:border-slate-900 bg-transparent" />
+                <select className="w-full border-b border-slate-200 py-3 text-sm outline-none bg-transparent">
+                   <option>Visita Urologica</option>
+                   <option>Longevity Protocol</option>
+                   <option>Medicina Estetica</option>
+                   <option>Consulenza Andrologica</option>
+                </select>
+                <textarea placeholder="Messaggio o Note" rows={3} className="w-full border-b border-slate-200 py-3 text-sm outline-none focus:border-slate-900 bg-transparent" />
+                <button className="w-full bg-slate-900 text-white py-5 font-bold uppercase tracking-widest text-[11px] hover:bg-slate-800 transition-all">Invia Richiesta</button>
+             </form>
+          </div>
+       </div>
+    </SectionRow>
+  </div>
 );
 
 // --- Main App ---
@@ -784,12 +718,12 @@ const App: React.FC = () => {
       <footer className="bg-white border-t border-slate-100 py-24">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center md:text-left mb-16">
-            <div className="col-span-1 md:col-span-1">
+            <div className="col-span-1">
               <span className="text-2xl font-serif font-bold text-slate-900">DR. PIER PAOLO BONANTE</span>
               <p className="text-[10px] tracking-[0.3em] uppercase text-slate-400 mt-2">Longevity & Medical Excellence</p>
             </div>
             <div>
-              <h5 className="text-[10px] uppercase font-bold tracking-widest text-slate-900 mb-6">Navigazione</h5>
+              <h5 className="text-[10px] uppercase font-bold tracking-widest text-slate-900 mb-6">Menu</h5>
               <div className="flex flex-col space-y-4 text-xs text-slate-500 uppercase tracking-widest">
                 <button onClick={() => { setPage('longevity'); window.scrollTo(0,0); }} className="hover:text-slate-900 transition-colors text-left">Longevity</button>
                 <button onClick={() => { setPage('medical'); window.scrollTo(0,0); }} className="hover:text-slate-900 transition-colors text-left">Urologia</button>
@@ -797,18 +731,17 @@ const App: React.FC = () => {
               </div>
             </div>
             <div>
-              <h5 className="text-[10px] uppercase font-bold tracking-widest text-slate-900 mb-6">Legale</h5>
+              <h5 className="text-[10px] uppercase font-bold tracking-widest text-slate-900 mb-6">Legal</h5>
               <div className="flex flex-col space-y-4 text-xs text-slate-500 uppercase tracking-widest">
-                <a href="#" className="hover:text-slate-900 transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-slate-900 transition-colors">Cookie Policy</a>
-                <a href="#" className="hover:text-slate-900 transition-colors">Termini di Servizio</a>
+                <a href="#" className="hover:text-slate-900 transition-colors">Privacy</a>
+                <a href="#" className="hover:text-slate-900 transition-colors">Cookie</a>
               </div>
             </div>
           </div>
           <div className="pt-12 border-t border-slate-50 text-center">
             <p className="text-[10px] text-slate-300 max-w-2xl mx-auto leading-relaxed uppercase tracking-widest">
-              &copy; {new Date().getFullYear()} Dr. Pier Paolo Bonante. Ordine dei Medici di Foggia n. 2506. <br/>
-              Le informazioni contenute sono fornite per scopi educativi e informativi conformi alle linee guida sanitarie.
+              &copy; {new Date().getFullYear()} Dr. Pier Paolo Bonante. Ordine Medici Foggia n. 2506. <br/>
+              Informazione sanitaria conforme alle linee guida ministeriali.
             </p>
           </div>
         </div>
